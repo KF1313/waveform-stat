@@ -2,9 +2,11 @@ extends Node2D
 
 var current_case = {
 	"image": "afib.jpg",
+	"mechanism_image": "afib_mechanism.png",
 	"correct": "Atrial Fibrillation",
 	"answers": ["Atrial Fibrillation", "Sinus Tachycardia", "Atrial Flutter", "Normal Sinus Rhythm"],
-	"explanation": "Atrial Fibrillation is identified by the absence of distinct P waves and an irregularly irregular rhythm. The ventricular rate is variable and the baseline shows chaotic fibrillatory waves."
+	"explanation": "Rhythm: Absent P waves, irregularly irregular ventricular rate, chaotic fibrillatory baseline. Mechanism: AF requires a trigger (focal pulmonary vein discharge) and substrate for maintenance. Sustained by focal activation or multiple wandering wavelets via re-entry circuits, amplified by left atrial dilation.",
+	"citation": "Source: LITFL.com"
 }
 
 var time_left = 30.0
@@ -61,6 +63,9 @@ func show_result(correct, message):
 	$ResultScreen.visible = true
 	$ResultScreen/ResultLabel.text = message
 	$ResultScreen/ExplanationLabel.text = current_case.explanation
+	$ResultScreen/CitationLabel.text = current_case.citation
+	var mechanism_texture = load("res://" + current_case.mechanism_image)
+	$ResultScreen/MechanismImage.texture = mechanism_texture
 
 func _on_next_pressed():
 	$ECGImage.visible = true
